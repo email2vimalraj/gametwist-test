@@ -2,7 +2,7 @@ var chromedriver = require('chromedriver');
 var htmlReporter = require('nightwatch-html-reporter');
 
 var reporter = new htmlReporter({
-  openBrowser: true,
+  openBrowser: false,
   reportsDirectory: __dirname + '/reports'
 });
 
