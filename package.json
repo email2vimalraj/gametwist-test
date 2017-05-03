@@ -7,7 +7,9 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "test": "nightwatch"
+    "test": "nightwatch",
+    "onChrome": "nightwatch",
+    "onFirefox": "nightwatch -c firefoxconfig.json"
   },
   "devDependencies": {
     "chromedriver": "^2.29.0",

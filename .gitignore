@@ -2,7 +2,4 @@
 /reports/
 .idea
 *.log
-*.jar
 *.png
-geckodriver
-chromedriver
