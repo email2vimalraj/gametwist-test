@@ -21,3 +21,12 @@ There are two types of reporting enabled:
 - Console logging
 - HTML Reporting
     - The html report is available under ./reports/report.html
+
+### Structure
+
+- `nightwatch.json` - contains all the default options required by nightwatch.
+- `firefoxconfig.json` - contains firefox specific options. When we execute using `npm run onFirefox` or `yarn onFirefox`, this config json will be used.
+- `globalHooks.js` - this file contains before and after hooks which creates / stops the chromedriver. This file is referred as part of the config json file.
+- `bin` directory - contains selenium server jar and the geckodriver binaries
+- `pages` directory - contains the page objects
+- `tests` directory - contains all the test scripts. Each file in this directory will be considered as a single suite.
