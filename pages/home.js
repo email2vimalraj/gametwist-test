@@ -23,12 +23,12 @@ var homeCommands = {
    * @returns the context
    */
   closePopUp: function() {
-    return this.api.element("css selector", "@closeButtonInPopup", function(result) {
+    this.api.pause(1000);
+    return this.api.element("css selector", "#wof_close_x", function(result) {
       if (result.status !== -1) {
-        this.waitForElementVisible("@closeButtonInPopup", 3000)
-          .click("@closeButtonInPopup");
+        this.waitForElementVisible("#wof_close_x", 3000).click("#wof_close_x");
       }
-      return this.expect.element("@closeButtonInPopup").to.not.be.present;
+      return this.expect.element("#wof_close_x").to.not.be.present.after(3000);
     });
   },
 
@@ -111,6 +111,7 @@ var homeCommands = {
    * @returns this context
    */
   verifyPageName: function(pagename) {
+    this.api.pause(3000);
     return this.waitForElementVisible("@breadCrumb", 3000)
       .expect.element("@breadCrumb").text.to.contains(pagename);
   },
@@ -120,8 +121,8 @@ var homeCommands = {
    * @returns this context
    */
   selectGermanLanguage: function () {
-    this.moveToElement("@selectLanguageButton", 10, 10)
-      .waitForElementVisible("@deutschLanguageButton", 3000)
+    this.click("@selectLanguageButton")
+      .waitForElementVisible("@deutschLanguageButton", 10000)
       .click("@deutschLanguageButton");
     this.api.pause(3000);
     return this;
@@ -132,8 +133,8 @@ var homeCommands = {
    * @returns this context
    */
   selectEnglishLanguage: function () {
-    this.moveToElement("@selectLanguageButton", 10, 10)
-      .waitForElementVisible("@englishLanguageButton", 3000)
+    this.click("@selectLanguageButton")
+      .waitForElementVisible("@englishLanguageButton", 10000)
       .click("@englishLanguageButton");
     this.api.pause(3000);
     return this;
@@ -160,8 +161,8 @@ var homeCommands = {
    * @returns this context
    */
   logoutUser: function() {
-    return this.moveToElement("@userMenuLink", 10, 10)
-      .waitForElementVisible("@logoutButton", 3000)
+    this.click("@userMenuLink")
+      .waitForElementVisible("@logoutButton", 10000)
       .click("@logoutButton");
   },
 
@@ -182,9 +183,11 @@ var homeCommands = {
  * @returns {boolean} True if success; false, otherwise.
  */
 function navigateToPage(driver, urlElement, pageName) {
-  return driver.click(urlElement)
-    .waitForElementVisible("@highlightedButton", 3000)
-    .expect.element("@breadCrumb").text.to.contains(pageName);
+  driver.api.pause(2000);
+  driver.click(urlElement);
+  driver.api.pause(3000);
+  driver.expect.element("@breadCrumb").text.to.contains(pageName).before(10000);
+  return driver;
 }
 
 module.exports = {
